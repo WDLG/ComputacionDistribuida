@@ -4,7 +4,8 @@ import time
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--input", required=True, help="ruta al archivo de entrada")
+ap.add_argument("-p", "--path", type=str,default="", help="ubicacion de la ruta del archivo de entrada")
+ap.add_argument("-i", "--input", required=True,type=str, help="nombre del archivos")
 ap.add_argument("-b", "--bitnumber", required=True,type=int,help="longitud en bits de cada valor")
 ap.add_argument("-o", "--output", type=str, default="out.csv",help="ruta al archivo de salida")
 args = vars(ap.parse_args())
@@ -12,7 +13,7 @@ args = vars(ap.parse_args())
 Etiquetas=None
 Valores=None
 n=args["bitnumber"]
-master_file=args["input"]
+master_file=args["path"]+args["input"]
 output=args["output"]
 
 
@@ -94,15 +95,17 @@ def guardarArchivo(cadena):
 
 
 tinicial=time.time()
-print "*Cargando Datos......"
+print "Cargando Datos......\n"
 cargarDatos(master_file)
-print "***Se han cargado los datos\n"
-print"*Calculando distancias........"
+print"Calculando distancias........"
 resultado=calcular()
+print"Se han calculado las distancias"
+print"Guardando distancias.."
 guardarArchivo(resultado)
-print"***Se han calculado las distancias\n"
-
+print"-------------------------------------------"
+print"Total de calculos realizados: "+str(len(resultado))
+print"-------------------------------------------"
+print "DISTANCIAS TANIMOTO GUARDADAS Y CALCULADAS CON EXITO!!!"
 tfinal=time.time()
-print "TIEMPO TOTAL DE EJECUCION"
-print (tfinal-tinicial)
+print "TIEMPO TOTAL DE EJECUCION: "+str(tfinal-tinicial)
 
