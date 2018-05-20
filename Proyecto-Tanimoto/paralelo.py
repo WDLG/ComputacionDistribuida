@@ -21,7 +21,7 @@ class myThread(threading.Thread):
    def run(self):
       self.listaParcial=self.listaParcial+calcularSingular(self.listaArchivos[self.tid])
       self.set_proceso()
-      print "Termino el hilo "+str(self.tid)+" "+str(len(self.listaParcial))
+      print "Termino el hilo "+str(self.tid)+". Total de distancias calculadas: "+str(len(self.listaParcial))
 
 
 
@@ -114,6 +114,7 @@ def guardar(listaCad):
 
 
 ap = argparse.ArgumentParser()
+ap.add_argument("-p", "--path", type=str,default="", help="ubicacion de la ruta de los archivos de entrada")
 ap.add_argument('-i','--input',type=str, required=True,action='append',nargs = '*',help='help: ruta al archivo de entrada')
 ap.add_argument("-b", "--bitnumber", required=True,type=int,help="longitud en bits de cada valor")
 ap.add_argument("-o", "--output", type=str, default="out.csv",help="ruta al archivo de salida")
@@ -122,8 +123,7 @@ args = vars(ap.parse_args())
 Etiquetas=None
 Valores=None
 n=args["bitnumber"]
-listaArchivos=args["input"][0]
-print listaArchivos
+listaArchivos=[args["path"]+file for file in args["input"][0]]
 output=args["output"]
 
 
@@ -142,7 +142,7 @@ tuplas_t3=[[0,3]]
 tuplas_t4=[[1,2]]
 lista_general=[tuplas_t1,tuplas_t2,tuplas_t3,tuplas_t4]
 
-print "Total de hilos que se crearan: "+str(len(listaArchivos))+".."
+print "Total de hilos que se crearan: "+str(len(listaArchivos))+"..\n"
 #CREAR HILOS
 
 
@@ -165,9 +165,10 @@ for hilo in listaHilos:
 
 
 
-print "Se han terminado calcular las distancias.\nGuardando resultados parciales....\n"
+print "Se han terminado de calcular las distancias.\nGuardando resultados parciales....\n"
 guardar(listaTotal)
-print len(listaTotal)
+print"-----------------------------------------------------------"
+print "Total de calculos realizados: "+str(len(listaTotal))
 
 print"-----------------------------------------------------------"
 print "DISTANCIAS TANIMOTO GUARDADAS Y CALCULADAS CON EXITO!!!"
