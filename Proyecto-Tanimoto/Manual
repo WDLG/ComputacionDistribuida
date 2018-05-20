@@ -1,0 +1,14 @@
+Uso:
+Para compilar:
+Programa Secuencial:
+$ python secuencial.py -p <Ruta de la ubicacion> -i <Archivo de entrada> -b <Tamaño en bits de todos los valores> -o <Archivo de Salida>
+Ejemplo:
+$ python secuencial.py -p Muestras/4-files/ -i m1.csv -b 512 -o Salida.csv
+
+Programa Paralelo:
+$ python secuencial.py -p <Ruta de la ubicacion> -i <Archivo entrada> <Archivo entrada>... -b <Tamaño en bits de todos los valores> -o <Archivo de Salida>
+Ejemplo:
+$python paralelo.py -p Muestras/4-files/ -i m1.csv m2.csv m3.csv m4.csv -b 512 -o Salida.csv
+
+Notas: 
+El tamaño en bits, se refiere a la longitud correspondientes cada farmaco, la misma que debe ser igual para todos 
