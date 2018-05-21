@@ -15,10 +15,12 @@ class myThread(threading.Thread):
       self.tid=tid
 
    def set_proceso(self):
-        if self.tuplas!=None:
-            for tupla in self.tuplas:
-               self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
 
+        try:
+                for tupla in self.tuplas:
+                    self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
+        except:
+                    self.listaParcial=self.listaParcial
    def run(self):
       self.listaParcial=self.listaParcial+calcularSingular(self.listaArchivos[self.tid])
       self.set_proceso()
@@ -138,10 +140,8 @@ listaTotal=[]
 listaHilos=[]
 
 tuplas_t1=[[0,1],[1,3]]
-tuplas_t2=[[0,2],[2,3]]
-tuplas_t3=[[0,3]]
-tuplas_t4=[[1,2]]
-lista_general=[tuplas_t1,tuplas_t2,tuplas_t3,tuplas_t4]
+tuplas_t2=None
+lista_general=[tuplas_t1,tuplas_t2]
 
 print "Total de hilos que se crearan: "+str(len(listaArchivos))+"..\n"
 #CREAR HILOS
