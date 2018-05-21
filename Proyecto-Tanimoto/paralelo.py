@@ -7,7 +7,7 @@ import time
 
 
 class myThread(threading.Thread):
-   def __init__(self,listaArchivos,tuplas=None,tid):
+   def __init__(self,listaArchivos,tid,tuplas=None):
       threading.Thread.__init__(self)
       self.listaArchivos=listaArchivos
       self.listaParcial = []
@@ -149,7 +149,7 @@ print "Total de hilos que se crearan: "+str(len(listaArchivos))+"..\n"
 
 print "Comenzando a calcular las distancias....\n"
 for i in range(0,len(listaArchivos)):
-    listaHilos.append(myThread(listaArchivos,lista_general[i], i))
+    listaHilos.append(myThread(listaArchivos,i,lista_general[i]))
 
 
 
