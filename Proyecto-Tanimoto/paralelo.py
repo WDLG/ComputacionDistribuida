@@ -15,7 +15,7 @@ class myThread(threading.Thread):
       self.tid=tid
 
    def set_proceso(self):
-        if self.tuplas==None:
+        if self.tuplas!=None:
             for tupla in self.tuplas:
                self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
 
