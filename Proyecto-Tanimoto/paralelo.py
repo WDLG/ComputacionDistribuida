@@ -7,7 +7,7 @@ import time
 
 
 class myThread(threading.Thread):
-   def __init__(self,listaArchivos,tuplas,tid):
+   def __init__(self,listaArchivos,tuplas=None,tid):
       threading.Thread.__init__(self)
       self.listaArchivos=listaArchivos
       self.listaParcial = []
@@ -15,8 +15,9 @@ class myThread(threading.Thread):
       self.tid=tid
 
    def set_proceso(self):
-        for tupla in self.tuplas:
-            self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
+        if self.tuplas==None:
+            for tupla in self.tuplas:
+               self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
 
    def run(self):
       self.listaParcial=self.listaParcial+calcularSingular(self.listaArchivos[self.tid])
