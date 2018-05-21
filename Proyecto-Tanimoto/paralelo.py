@@ -139,7 +139,7 @@ tinicial=time.time()
 listaTotal=[]
 listaHilos=[]
 
-tuplas_t1=[[0,1],[1,3]]
+tuplas_t1=[[0,1]]
 tuplas_t2=None
 lista_general=[tuplas_t1,tuplas_t2]
 
