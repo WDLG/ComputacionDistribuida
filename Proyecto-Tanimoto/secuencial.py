@@ -96,11 +96,10 @@ print"Calculando distancias........"
 resultado=calcular()
 print"Se han calculado las distancias"
 print"Guardando distancias.."
-guardarArchivo(resultado)
+guardar(resultado)
 print"-------------------------------------------"
 print"Total de calculos realizados: "+str(len(resultado))
 print"-------------------------------------------"
 print "DISTANCIAS TANIMOTO GUARDADAS Y CALCULADAS CON EXITO!!!"
 tfinal=time.time()
 print "TIEMPO TOTAL DE EJECUCION: "+str(tfinal-tinicial)
-
