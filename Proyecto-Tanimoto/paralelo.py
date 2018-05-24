@@ -7,7 +7,7 @@ import time
 
 
 class myThread(threading.Thread):
-   def __init__(self,listaArchivos,tid,tuplas=None):
+   def __init__(self,listaArchivos,tid,tuplas):
       threading.Thread.__init__(self)
       self.listaArchivos=listaArchivos
       self.listaParcial = []
@@ -15,10 +15,11 @@ class myThread(threading.Thread):
       self.tid=tid
 
    def set_proceso(self):
-
         try:
                 for tupla in self.tuplas:
-                    self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[tupla[0]],self.listaArchivos[tupla[1]])
+
+                    self.listaParcial=self.listaParcial+calcularCompuesto(self.listaArchivos[int(tupla[0])],self.listaArchivos[int(tupla[1])])
+
         except:
                     self.listaParcial=self.listaParcial
    def run(self):
@@ -53,7 +54,7 @@ def get_tanimoto_values(cadenaA,cadenaB):
                         onlyA=onlyA+1
                 elif cadenaB[i]=='1':
                         onlyB=onlyB+1 
-return bothAB,onlyA,onlyB      
+        return bothAB,onlyA,onlyB      
      
 def cargarDatos(nombre):
         raw_data=open(str(nombre),"r")
@@ -72,7 +73,7 @@ def calcularCompuesto(archivoA,archivoB):
         onlyB=0
         for i in range(0,len(DatosA[0])):
                 for j in range(0,len(DatosB[0])):     
-                        val=1-EcuacionTanimoto(get_tanimoto_values(Datos[0][j],DatosA[0][i]))
+                        val=1-EcuacionTanimoto(get_tanimoto_values(DatosB[0][j],DatosA[0][i]))
                         cad=str(DatosA[1][i])+","+str(DatosB[1][j])+","+str(val)
                         listAux.append(cad+"\n")
         #Valor que el hilo retorna
