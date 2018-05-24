@@ -29,6 +29,32 @@ class myThread(threading.Thread):
 
 
 
+def convertirHex_Bin(cadena):
+        return "{0:8b}".format(int(cadena,16))
+        
+
+def EcuacionTanimoto(valores):
+        return valores[0]/(valores[1]+valores[2]+valores[0]+0.000)
+
+
+def get_tanimoto_values(cadenaA,cadenaB):
+        global n
+        
+        bothAB=0
+        onlyA=0
+        onlyB=0
+        
+        cadenaA=convertirHex_Bin(cadenaA)
+        cadenaB=convertirHex_Bin(cadenaB)
+        for i in range(0,n):
+                if cadenaA[i]=='1' and cadenaA[i]==cadenaB[i]:
+                        bothAB=bothAB+1
+                elif cadenaA[i]=='1':
+                        onlyA=onlyA+1
+                elif cadenaB[i]=='1':
+                        onlyB=onlyB+1 
+return bothAB,onlyA,onlyB      
+     
 def cargarDatos(nombre):
         raw_data=open(str(nombre),"r")
         datos=np.loadtxt(raw_data,dtype='str',delimiter=",")
@@ -76,13 +102,6 @@ def calcularSingular(archivo):
         #out.put(listAux)
         return listAux
 
-def multiCalculador(archivo,listaArchivos,tid):
-    listaT=[]
-    listaT=listaT+ calcularSingular(archivo)
-    for i in range(tid,len(listaArchivos)):
-            if i!=tid:
-                listaT=listaT+calcularCompuesto(archivo,listaArchivos[i])
-    return listaT
 
 def guardar(listaCad):
         archivo = open(str(output), "a")
