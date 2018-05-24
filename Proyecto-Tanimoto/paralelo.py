@@ -46,17 +46,7 @@ def calcularCompuesto(archivoA,archivoB):
         onlyB=0
         for i in range(0,len(DatosA[0])):
                 for j in range(0,len(DatosB[0])):     
-                        orig="{0:8b}".format(int(DatosB[0][j],16))
-                        sublista="{0:8b}".format(int(DatosA[0][i],16))
-                        for k in range(0,n):
-                            if orig[k]=='1' and orig[k]==sublista[k]:
-                                    bothAB=bothAB+1
-                            elif orig[k]=='1':
-                                    onlyA=onlyA+1
-                            elif sublista[k]=='1':
-                                    onlyB=onlyB+1
-
-                        val=1-bothAB/(onlyA+onlyB+bothAB+0.000)
+                        val=1-EcuacionTanimoto(get_tanimoto_values(Datos[0][j],DatosA[0][i]))
                         cad=str(DatosA[1][i])+","+str(DatosB[1][j])+","+str(val)
                         listAux.append(cad+"\n")
         #Valor que el hilo retorna
@@ -79,19 +69,9 @@ def calcularSingular(archivo):
                 for j in range(i,len(Valores)):     
                         
                         if i!=j:
-                        	orig="{0:8b}".format(int(Valores[j],16))
-                        	sublista="{0:8b}".format(int(Valores[i],16))
-                        	for k in range(0,n):
-                        		if orig[k]=='1' and orig[k]==sublista[k]:
-                        		 		bothAB=bothAB+1
-                        		elif orig[k]=='1':
-                        				onlyA=onlyA+1
-                        		elif sublista[k]=='1':
-                        				onlyB=onlyB+1
-
-                                val=1-bothAB/(onlyA+onlyB+bothAB+0.000)
-                                cad=str(Etiquetas[i])+","+str(Etiquetas[j])+","+str(val)
-                                listAux.append(cad+"\n")
+                           val=1-EcuacionTanimoto(get_tanimoto_values(Valores[j],Valores[i]))
+                           cad=str(Etiquetas[i])+","+str(Etiquetas[j])+","+str(val)
+                           listAux.append(cad+"\n")
         #Valor que el hilo retorna
         #out.put(listAux)
         return listAux
