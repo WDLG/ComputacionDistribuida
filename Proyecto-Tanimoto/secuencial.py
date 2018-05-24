@@ -33,7 +33,7 @@ def convertirHex_Bin(cadena):
         return "{0:8b}".format(int(cadena,16))
         
 
-def EcuacionTanimoto(valores,valor1,valor2):
+def EcuacionTanimoto(valores):
         return valores[0]/(valores[1]+valores[2]+valores[0]+0.000)
 
 
@@ -70,7 +70,7 @@ def calcular():
                         if j==len(Valores):
                                 break
                         if i!=j: 
-                                val=1-EcuacionTanimoto(get_tanimoto_values(Valores[j],Valores[i]),i,j)
+                                val=1-EcuacionTanimoto(get_tanimoto_values(Valores[j],Valores[i]))
                                 cad=str(Etiquetas[i])+","+str(Etiquetas[j])+","+str(val)
                                 lis.append(cad+"\n")
                                 #guardarArchivo(cad)
@@ -86,11 +86,6 @@ def guardar(listaCad):
         archivo.close()
                
         
-
-def guardarArchivo(cadena):
-    archivo = open(str(output), "a")
-    archivo.write(str(cadena)+"\n")
-    archivo.close()
 
 
 
