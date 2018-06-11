@@ -7,7 +7,9 @@ from threading import Thread
 
 
 
-HOST = '172.31.103.224'   # Symbolic name, meaning all available interfaces
+#HOST = '172.31.103.224'   # Symbolic name, meaning all available 
+HOST = 'localhost'
+#interfaces
 PORT = 33012 # Arbitrary non-privileged port
 
 listaClientes=[]
@@ -90,7 +92,7 @@ def enviarMensajeGlobal(cliente_origen,msg):
     global listaClientes
     for clienteOBJ in listaClientes:
         if clienteOBJ.nickname!=cliente_origen.nickname:
-            reply=Mensaje(cliente_origen.nickname,clienteOBJ,msg).establecer_formato()
+            reply="\033[1;33;40m"+Mensaje(cliente_origen.nickname,clienteOBJ,msg).establecer_formato()+"[GLOBAL]"
             clienteOBJ.conn.sendall('\033[1;31;40m'+reply)
 
 def enviarMensaje(cliente,cliente_destino,msg):
@@ -210,4 +212,3 @@ def establecer_session_cliente(conn, ip, port):
 
 
 inicializar_servidor()
-
